@@ -1,0 +1,19 @@
+{
+    "name": "PyTorchLocal",
+    "image": "rocm/pytorch:latest"
+    
+    // Give the container direct access to the AMD iGPU
+    "runArgs": [
+        "--device=/dev/kfd",
+        "--device=/dev/dri",
+        "--group-add=video",
+        "--shm-size=16g"
+    ],
+
+    // Critical for Ryzen AI / RDNA3-class iGPUs
+    "containerEnv": {
+        "HSA_OVERRIDE_GFX_VERSION": "11.0.0"
+        // "HSA_OVERRIDE_GFX_VERSION": "10.3.0"
+  }
+
+}
